@@ -7,8 +7,9 @@ none='\033[0m'
 until
     echo -e "${green}1${none}. 选择 ${red}电信${none} 出口"
     echo -e "${green}2${none}. 选择 ${red}联通${none} 出口"
-    echo -e "${green}3${none}. 查看默认出口"
-    echo -e "${green}4${none}. 退出"	
+    echo -e "${green}3${none}. 选择 ${red}移动${none} 出口"
+    echo -e "${green}4${none}. 查看默认出口"
+    echo -e "${green}5${none}. 退出"	
     read input
 	test $input = 4
         do
@@ -18,13 +19,17 @@ until
 	   echo "当前默认出口："
 	   ip route && exit ;;
 	2) echo -e "选择 ${red}联通${none} 出口"
-       ip route change default via 172.16.5.1 dev eth0 proto static
+           ip route change default via 172.16.5.1 dev eth0 proto static
 	   echo "当前默认出口："
 	   ip route && exit ;;
-	3) echo "查看默认出口"
+	3) echo -e "选择 ${red}移动${none} 出口"
+	   ip route change default via 172.16.3.1 dev eth0 proto static
 	   echo "当前默认出口："
 	   ip route && exit ;;
-	4) echo "请选择（1-4）"
+	4) echo "查看默认出口"
+	   echo "当前默认出口："
+	   ip route && exit ;;
+	5) echo "请选择（1-5）"
 	esac
 done
 
